@@ -9,7 +9,7 @@
   },
   "enginees":{
     "node" : "10.13.0"
-  }
+  },
   "author": "kanishka",
   "license": "ISC",
   "dependencies": {
