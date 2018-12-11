@@ -15,30 +15,31 @@ io.on('connection' , (socket) => {
   console.log('New User Connected');
 
 
-   socket.on('createEmail', (newEmail) =>{
+   // socket.on('createEmail', (newEmail) =>{
+   //
+   //   console.log('createEmail',newEmail);
+   // });
 
-     console.log('createEmail',newEmail);
+   socket.on('createMessage' ,(message) =>{
+     console.log('CreateMessage :', message);
+     io.emit('newMessage', {
+       from: message.from,
+       text:message.text,
+       createdAt:new Date().getTime()
+     });
    });
 
-   socket.on('createMessage' ,(newmes) =>{
-     console.log('CreateMessage :', newmes);
-   });
 
-   socket.emit('newMessage',{
-     from:'tgkanishka',
-     text:'hello !! Welcome , i am back',
-     createdAt:23/09/18
-   });
 
   socket.on('disconnection' , () => {
     console.log(' User Disconnected');
   });
 
-  socket.emit('newEmail',{
-    from:'kanishka',
-    text:'hello !! Welcome everyone',
-    createdAt:23456
-  });
+  // socket.emit('newEmail',{
+  //   from:'kanishka',
+  //   text:'hello !! Welcome everyone',
+  //   createdAt:23456
+  // });
 
 });
 
