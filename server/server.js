@@ -22,19 +22,25 @@ socket.on('join',(params,callback) =>
   callback('Name and Room are not valid');
 
   else {
+    socket.join(params.room);
+
+    socket.emit('newMessage', generateMessage('Admin', 'Welcome to the ChatApp')
+
+    );
+
+   socket.broadcast.to(params.room).emit('newMessage',generateMessage('Admin', `${params.name} has joined `));
+
     callback();
   }
+
+
 
 });
    // socket.on('createEmail', (newEmail) =>{
    //
    //   console.log('createEmail',newEmail);
    // });
-     socket.emit('newMessage', generateMessage('Admin', 'Welcome to the ChatApp')
 
-     );
-
-   socket.broadcast.emit('newMessage',generateMessage('Admin', 'New User Joined'));
 
    socket.on('createMessage' ,(message,callback) =>{
      console.log('CreateMessage :', message);
