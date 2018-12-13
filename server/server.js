@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const socketIO = require('socket.io');
 const http = require('http');
+const {isRealString} = require('./utils/validation.js');
 const {generateMessage,generateLocationMessage} = require('./utils/message.js');
 
 var app = express();
@@ -15,7 +16,16 @@ var io = socketIO(server);
 io.on('connection' , (socket) => {
   console.log('New User Connected');
 
+socket.on('join',(params,callback) =>
+{
+  if(!isRealString(params.name)||(!isRealString(params.room)))
+  callback('Name and Room are not valid');
 
+  else {
+    callback();
+  }
+
+});
    // socket.on('createEmail', (newEmail) =>{
    //
    //   console.log('createEmail',newEmail);
